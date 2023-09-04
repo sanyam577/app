@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add your CSS and other resources here -->
+</head>
+<body>
+    <h1>Salary Result</h1>
+    <div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+    <div th:if="${salaryData}" th:text="${salaryData}"></div>
+</body>
+</html>

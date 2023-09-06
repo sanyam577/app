@@ -34,25 +34,30 @@ public class SalaryController {
         return response;
     }
 
-    private String getData(String companyName, String jobRole) throws IOException {
-        StringBuilder br = new StringBuilder();
+private String getData(String companyName, String jobRole) throws IOException {
+    StringBuilder br = new StringBuilder();
 
-        String url = "https://www.ambitionbox.com/salaries/" + companyName + "-salaries/" + jobRole;
+    String url = "https://www.ambitionbox.com/salaries/" + companyName + "-salaries/" + jobRole;
 
-        Document doc = Jsoup.connect(url).get();
-        System.out.println(doc.title());
-        Elements elements = doc.select(".salaries-wrapper__rows");
-        System.out.println();
+    // Set the User-Agent header to mimic a web browser request
+    Document doc = Jsoup.connect(url)
+        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+        .get();
+    
+    System.out.println(doc.title());
+    Elements elements = doc.select(".salaries-wrapper__rows");
+    System.out.println();
 
-        String salary;
+    String salary;
 
-        for (Element e : elements) {
-            salary = e.select(".row-left__salary").text();
-            br.append(salary);
-        }
-
-        return br.toString();
+    for (Element e : elements) {
+        salary = e.select(".row-left__salary").text();
+        br.append(salary);
     }
+
+    return br.toString();
+}
+
 }
 
 //Url:- http://localhost:7777/salary
